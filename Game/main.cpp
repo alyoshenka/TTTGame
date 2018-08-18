@@ -15,14 +15,17 @@ int main() {
 	};
 	
 	// turn number (1-9)
-	int turnNum = 0;
+	int turnNum = 1;
 
 	// welcome message
 	std::cout << "Welcome to Tic-Tac-Toe." << std::endl;
 	std::cout << "X goes first." << std::endl;
-
 	printBoard(board);
-
+	newTurnMsg(turnNum);
+	takeRow();
+	takeCol();
+	printBoard(board);
+	changeBoard(1, 1, board[3][3]);
 	system("pause");
 	return 0;
 }

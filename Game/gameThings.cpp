@@ -19,7 +19,9 @@ void printBoard(int arr[3][3]) {
 
 // prints turn number and whose turn it is
 void newTurnMsg(int turnNumber) {
-
+	if (turnNumber % 2) {
+		std::cout << "X's Turn." << std::endl;
+	}
 }
 
 // tests is someone has made a winning play
@@ -28,4 +30,23 @@ void newTurnMsg(int turnNumber) {
 // 2 for O
 int testForWinner(int arr[3][3]) {
 	return 0;
+}
+
+int takeRow() {
+	int row = 0; 
+	std::cout << "Where would you like to play?" << std::endl;
+	std::cout << "Enter row: ";
+	std::cin >> row;
+	return row;
+}
+
+int takeCol() {
+	int col = 0;
+	std::cout << "Enter col: ";
+	std::cin >> col;
+	return col;
+}
+
+void changeBoard(int row, int col, int board[3][3]) {
+
 }
