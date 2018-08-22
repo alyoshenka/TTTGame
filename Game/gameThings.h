@@ -10,4 +10,4 @@ int takeRow();
 
 int takeCol();
 
-void changeBoard(int row, int col);
+void changeBoard(int arr[3][3]);

@@ -47,6 +47,8 @@ int takeCol() {
 	return col;
 }
 
-void changeBoard(int row, int col, int board[3][3]) {
-
+void changeBoard(int board[3][3]) {
+	int row = takeRow();
+	int col = takeCol();
+	board[row-1][col-1] = 1;
 }

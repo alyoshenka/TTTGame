@@ -25,7 +25,7 @@ int main() {
 	takeRow();
 	takeCol();
 	printBoard(board);
-	changeBoard(1, 1, board[3][3]);
+	changeBoard(board);
 	system("pause");
 	return 0;
 }
