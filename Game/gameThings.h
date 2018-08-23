@@ -2,7 +2,7 @@
 
 void printBoard(int arr[3][3]);
 
-void newTurnMsg(int turnNumber);
+void newTurnMsg(bool isXTurn);
 
 int testForWinner(int arr[3][3]);
 

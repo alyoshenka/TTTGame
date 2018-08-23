@@ -18,10 +18,14 @@ void printBoard(int arr[3][3]) {
 }
 
 // prints turn number and whose turn it is
-void newTurnMsg(int turnNumber) {
-	if (turnNumber % 2) {
+void newTurnMsg(bool isXTurn) {
+	if (isXTurn) {
 		std::cout << "X's Turn." << std::endl;
 	}
+	else {
+		std::cout << "Y's Turn." << std::endl;
+	}
+	isXTurn = false;
 }
 
 // tests is someone has made a winning play

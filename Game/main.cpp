@@ -32,9 +32,7 @@ int main() {
 		exit	
 	*/
 
-
-	// turn number (1-9)
-	int turnNum = 1;
+	bool isXTurn = true;
 
 	// welcome message
 	std::cout << "Welcome to Tic-Tac-Toe." << std::endl;
@@ -43,8 +41,10 @@ int main() {
 	// newTurnMsg(turnNum);
 	changeBoard(board);
 	printBoard(board);
+	newTurnMsg(isXTurn);
+	changeBoard(board);
 
-	winMsg(1);
+	winMsg(isXTurn);
 	system("pause");
 	return 0;
 }
