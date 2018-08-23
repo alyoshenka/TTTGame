@@ -32,6 +32,7 @@ int testForWinner(int arr[3][3]) {
 	return 0;
 }
 
+// takes row input
 int takeRow() {
 	int row = 0; 
 	std::cout << "Where would you like to play?" << std::endl;
@@ -40,6 +41,7 @@ int takeRow() {
 	return row;
 }
 
+// takes column input
 int takeCol() {
 	int col = 0;
 	std::cout << "Enter col: ";
@@ -47,8 +49,82 @@ int takeCol() {
 	return col;
 }
 
+// changes the board after taking move input
 void changeBoard(int board[3][3]) {
 	int row = takeRow();
 	int col = takeCol();
-	board[row-1][col-1] = 1;
+	board[col-1][row-1] = 1; // backwards!
+	// std::cout << board[row - 1][col - 1] << std::endl; // test
+}
+
+// checks if board matches a winning board layout
+bool checkForWin(int board[3][3]) {
+	
+	// winning moves
+	int win1[3][3] = {
+		{ 1, 1, 1 },
+		{ 0, 0, 0 },
+		{ 0, 0, 0 } };
+
+	int win2[3][3] = {
+		{ 0, 0, 0 },
+		{ 1, 1, 1 },
+		{ 0, 0, 0 } };
+
+	int win3[3][3] = {
+		{ 0, 0, 0 },
+		{ 0, 0, 0 },
+		{ 1, 1, 1 } };
+
+	int win4[3][3] = {
+		{ 1, 0, 0 },
+		{ 1, 0, 0 },
+		{ 1, 0, 0 } };
+
+	int win5[3][3] = {
+		{ 0, 1, 0 },
+		{ 0, 1, 0 },
+		{ 0, 1, 0 } };
+
+	int win6[3][3] = {
+		{ 0, 0, 1 },
+		{ 0, 0, 1 },
+		{ 0, 0, 1 } };
+
+	int win7[3][3] = {
+		{ 1, 0, 0  },
+		{ 0, 1, 0 },
+		{ 0, 0, 1 } };
+
+	int win8[3][3] = {
+		{ 0, 0, 1 },
+		{ 0, 1, 0 },
+		{ 1, 0, 0 } };
+
+	// int winConditions[3][3][8] = { win1, win2, win3,
+	// 	win4, win5, win6, win7, win8 };
+
+	// there's a better way to do this
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			if (board[i][j] != win1[i][j]) {
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+// displays who won
+void winMsg(int winner) {
+	if (winner == 1) {
+		std::cout << "X won." << std::endl;
+	}
+	else if (winner == 0) {
+		std::cout << "O won." << std::endl;
+	}
+	else {
+		std::cout << "Error" << std::endl;
+	}
 }

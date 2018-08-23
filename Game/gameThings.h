@@ -11,3 +11,5 @@ int takeRow();
 int takeCol();
 
 void changeBoard(int arr[3][3]);
+
+void winMsg(int winner);
