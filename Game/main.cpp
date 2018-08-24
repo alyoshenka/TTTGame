@@ -5,6 +5,8 @@ using namespace std;
 // To Do:
 // Reduce redundancy between takeRow()
 // and takeCol()
+// check is using "player" between files
+// is okay
 
 // Main application function
 int main() {
