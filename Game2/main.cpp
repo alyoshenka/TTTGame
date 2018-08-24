@@ -1,73 +1,60 @@
 #include <iostream>
 
-int SIZE = 3; 
-int board[3][3];
-int playerTurn = 1; // 1 = X	2 = O
+// int SIZE = 3; 
+// int board[3][3];
+// int playerTurn = 1; // 1 = X	2 = O
 
-void printWelcome() {
-	std::cout << "This is a Tic Tac Toe Game." << std::endl;
-}
-
-void printBoard(int board[3][3]) {
-	for (int i = 0; i < SIZE; i++) {
-		for (int j = 0; j < SIZE; j++) {
-			if (board[i][j] == 1) {
-				std::cout << "X";
-			}
-			else if (board[i][j] == 2) {
-				std::cout << "O";
-			}
-			else {
-				std::cout << "+";
-			}
-			std::cout << " ";
-		}
-		std::cout << std::endl;
-	}
-}
-
-// This function prints out whose turn it is and then
-// switches the turn number
-void playerTurnMsg(int playerTurn) {
-	if (playerTurn == 1) {
-		std::cout << "X's turn." << std::endl;
-		playerTurn = 2; // switches turn
-	}
-	else if (playerTurn == 2) {
-		std::cout << "O's Turn." << std::endl;
-		playerTurn = 1; // switches turn
-	}
-	else {
-		std::cout << "playerTurn error" << std::endl;
-	}
-}
-
-int takeRow() {
-	int row = 0;
-	std::cout << "What row? ";
-	std::cin >> row;
-	return row;
-}
-
-int takeCol() {
-	int col = 0;
-	std::cout << "What column? ";
-	std::cin >> col;
-	return col;
-}
-
-void updateBoard() {
-	int row = takeRow();
-	int col = takeCol();
-}
+#include<iostream>
+#include "helper.h"
+using namespace std;
 
 int main() {
 
+	int board[3][3] = {};
+	int playerTurn = 1;
+	int winner = 0;
+	// int turnCount = 1;
+
 	printWelcome();
 	printBoard(board);
-	playerTurnMsg(playerTurn);
+
+	winner = testForWin(board, playerTurn);
+	while (winner == 0) {
+		playerTurn = turnMsg(playerTurn);
+		updateBoard(board);
+		printBoard(board);
+		winner = testForWin(board, playerTurn);
+		
+		// do in helper (later)
+		/*
+		if (playerTurn == 1) {
+			playerTurn == 2;
+		}
+		else if(playerTurn == 2) {
+			playerTurn == 1;
+		}
+		else {
+			cout << "Error" << endl;
+		}
+		*/
+		
+		cout << "Win: " << winner << endl;
+	}
+	cout << "END" << endl;
 	printBoard(board);
-	updateBoard();
+	cout << winner << endl;
+
+	switch (winner) {
+		case 1:
+			cout << "X wins." << endl;
+		case 2:
+			cout << "O wins." << endl;
+		case 3:
+			cout << "Tie." << endl;
+		default:
+			cout << "Error" << endl;
+	}
+
 
 	system("pause");
 	return 0;
