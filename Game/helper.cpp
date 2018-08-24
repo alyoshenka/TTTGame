@@ -5,24 +5,21 @@ using namespace std;
 // board size
 int SIZE = 3;
 
-// 0 = blank
-// 1 = X
-// 2 = O
-// player marker
-// set to 0 later
-int playerChar = 1;
-
+// Turn number
 int turnCount = 1;
 
 // This function prints a welcome message.
 void printWelcome() {
+	std::cout << std::endl;
 	cout << "This is a Tic Tac Toe Game." << endl;
 }
 
 // This function prints the board.
 void printBoard(int board[3][3]) {
+	std::cout << std::endl;
 	for (int i = 0; i < SIZE; i++) {
 		for (int j = 0; j < SIZE; j++) {
+			/*
 			if (board[i][j] == 1) {
 				std::cout << "X";
 			}
@@ -35,30 +32,54 @@ void printBoard(int board[3][3]) {
 			else {
 				cout << "Error" << endl;
 			}
-			std::cout << " ";
+			*/
+
+			switch (board[i][j]) {
+				// 1 = X
+				case 1:
+					std::cout << "X";
+					break;
+				// 2 = O
+				case 2:
+					std::cout << "O";
+					break;
+				// 0 = blank
+				case 0:
+					std::cout << "+";
+					break;
+				// This should never happen
+				default:
+					std::cout << "Error";
+			}
+			// spacer
+			std::cout << "  ";
 		}
+		// spacer
+		std::cout << std::endl;
+		// new line
 		std::cout << std::endl;
 	}
 }
 
 // This function prints out whose turn it is and then
 // switches the turn number
-int turnMsg(int playerTurn) {
-	if (playerTurn == 1) {
+void turnMsg(int player) {
+	std::cout << std::endl;
+	if (player == 1) {
 		std::cout << "X's turn." << std::endl;
 		// playerTurn = 2; // switches turn
 		// playerChar = 1;
 	}
-	else if (playerTurn == 2) {
+	else if (player == 2) {
 		std::cout << "O's Turn." << std::endl;
 		// playerTurn = 1; // switches turn
 		// playerChar = 2;
 	}
 	else {
-		std::cout << "playerTurn error" << std::endl;
+		std::cout << "Error" << std::endl;
 	}
+	// Update turn count
 	turnCount++;
-	return playerTurn;
 }
 
 // IF ELSE HERE	
@@ -66,13 +87,16 @@ int turnMsg(int playerTurn) {
 // This function promts for the row to 
 // place a marker
 int takeRow() {
+	std::cout << std::endl;
 	int row = 0;
-	std::cout << "What row? ";
+	std::cout << "In what row would you like to play? ";
 	std::cin >> row;
 	// input validation
 	while (row < 1 || row > SIZE) {
+		std::cout << std::endl;
 		cout << "Invalid input." << endl;;
-		std::cout << "What row? ";
+		std::cout << std::endl;
+		std::cout << "In what row would you like to play? ";
 		std::cin >> row;
 	}
 	return row;
@@ -81,13 +105,16 @@ int takeRow() {
 // This function promts for the column to 
 // place a marker
 int takeCol() {
+	std::cout << std::endl;
 	int col = 0;
-	std::cout << "What column? ";
+	std::cout << "In what column would you like to play? ";
 	std::cin >> col;
 	// input validation - number
 	while (col < 1 || col > SIZE) {
+		std::cout << std::endl;
 		cout << "Invalid input." << endl;;
-		std::cout << "What column? ";
+		std::cout << std::endl;
+		std::cout << "In what row would you like to play? ";
 		std::cin >> col;
 	}
 	return col;
@@ -95,112 +122,23 @@ int takeCol() {
 
 // This function updates the game board 
 // using the input marker placement
-void updateBoard(int board[3][3]) {
+void updateBoard(int board[3][3], int player) {
 	// int c = 0; // switch to char for X and O
-	int row = takeRow();
-	int col = takeCol();
-	/*
-	if (playerChar == 1) {
-		c = 1;
-	}
-	else if(playerChar == 2){
-		c = 2;
-	}
-	else {
-		cout << "Error" << endl;
-	}
-	*/
+	int row = takeRow() - 1; // index = 0
+	int col = takeCol() - 1;
 
 	// while unopen space
-	while (board[row-1][col-1] != 0) {
+	while (board[row][col] != 0) {
 		cout << "This spot has already been played. Pick another." << endl;
+		turnMsg(player);
 		printBoard(board);
 		int row = takeRow();
 		int col = takeCol();
 	}
-	board[row-1][col-1] = playerChar;
-
-	// change later
-	if (playerChar == 1) {
-		playerChar = 2;
-	}
-	else if (playerChar == 2) {
-		playerChar = 1;
-	}
-	else {
-		cout << "Error" << endl;
-	}
+	board[row][col] = player;
 }
 
-
-/*
-// This function tests to see if a player has won.
-// 0 = no winner
-// 1 = X wins
-// 2 = O wins
-// 3 = tie
-int testForWin(int board[3][3]) {
-
-	// winning moves
-	int win1[3][3] = {
-		{ 1, 1, 1 },
-		{ 0, 0, 0 },
-		{ 0, 0, 0 } };
-
-	int win2[3][3] = {
-		{ 0, 0, 0 },
-		{ 1, 1, 1 },
-		{ 0, 0, 0 } };
-
-	int win3[3][3] = {
-		{ 0, 0, 0 },
-		{ 0, 0, 0 },
-		{ 1, 1, 1 } };
-
-	int win4[3][3] = {
-		{ 1, 0, 0 },
-		{ 1, 0, 0 },
-		{ 1, 0, 0 } };
-
-	int win5[3][3] = {
-		{ 0, 1, 0 },
-		{ 0, 1, 0 },
-		{ 0, 1, 0 } };
-
-	int win6[3][3] = {
-		{ 0, 0, 1 },
-		{ 0, 0, 1 },
-		{ 0, 0, 1 } };
-
-	int win7[3][3] = {
-		{ 1, 0, 0 },
-		{ 0, 1, 0 },
-		{ 0, 0, 1 } };
-
-	int win8[3][3] = {
-		{ 0, 0, 1 },
-		{ 0, 1, 0 },
-		{ 1, 0, 0 } };
-	
-	int winningPlays[3][3][8] = {win1[3][3], win2[3][3], 
-		win3[3][3], win4[3][3], win5[3][3], win6[3][3],
-		win7[3][3], win8[3][3]};
-
-	// for board in winningPlays
-	for (int i = 0; i < 8; i++) {
-		// checking for X now, modify layer for O
-		for (int col = 0; col < SIZE; col++) {
-			for (int row = 0; row < SIZE; row++) {
-			
-			}
-		}
-	}
-
-
-	return 0;
-}
-*/
-
+// This function tests for a winning play.
 int testForWin(int board[3][3], int player) {
 
 	// you can't win until 5 moves have been played
@@ -243,6 +181,40 @@ int testForWin(int board[3][3], int player) {
 
 	// no win, no tie
 	return 0;
+}
+
+// This function switches the turn counter
+int switchTurn(int playerTurn) {
+	if (playerTurn == 1) {
+		return 2;
+	}
+	if (playerTurn == 2) {
+		return 1;
+	}
+}
+
+void endMsg(int winner) {
+
+	// Say that game has ended
+	std::cout << std::endl;
+	cout << "GAME OVER" << endl;
+	std::cout << std::endl;
+
+	// List winner
+	switch (winner) {
+	case 1:
+		cout << "X wins." << endl;
+		break;
+	case 2:
+		cout << "O wins." << endl;
+		break;
+	case 3:
+		cout << "Tie." << endl;
+		break;
+	default:
+		cout << "Error" << endl;
+	}
+	std::cout << std::endl;
 }
 
 void play() {

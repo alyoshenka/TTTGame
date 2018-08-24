@@ -1,50 +1,58 @@
-#include <iostream>
-#include "gameThings.h"
+#include<iostream>
+#include "helper.h"
+using namespace std;
 
+// To Do:
+// Reduce redundancy between takeRow()
+// and takeCol()
+
+// Main application function
 int main() {
 
-	// variables
-	// ttt game board
-	// = {0}; ?
-	// [rows] [columns]
-	int board[3][3] = 
-	{
-		{0, 0, 0},
-		{0, 0, 0},
-		{0, 0, 0}
-	};
+	// Game board
+	int board[3][3] = {};
 
-	/*
-	Steps For Game
-		Display welcome
-		show board
-		show turn
-		prompt turn
-		input move
-		update board
-		update player's turn
-		show board
-		show turn
-		prompt turn
+	// 1 = X
+	// 2 = O
+	// Player
+	int player = 1;
 
-		check for wins
-		display win message
-		exit	
-	*/
+	// 0 = no winner yet
+	// 1 = X wins
+	// 2 = Y wins
+	// 3 = Tie
+	// Winner test
+	int winner = 0;
 
-	bool isXTurn = true;
-
-	// welcome message
-	std::cout << "Welcome to Tic-Tac-Toe." << std::endl;
-	std::cout << "X goes first." << std::endl;
-	// printBoard(board);
-	// newTurnMsg(turnNum);
-	changeBoard(board);
+	// Welcome user
+	printWelcome();
 	printBoard(board);
-	newTurnMsg(isXTurn);
-	changeBoard(board);
 
-	winMsg(isXTurn);
-	system("pause");
+	// winner = testForWin(board, player); // WHY AM I DOING THIS HERE
+
+	// While there is no winner and no tie
+	while (winner == 0) {
+
+		// Say whose turn it is
+		turnMsg(player);
+
+		// Take new input
+		updateBoard(board, player);
+
+		// Show said input
+		printBoard(board);
+
+		// Test for winning play
+		winner = testForWin(board, player);
+
+		// Switch to next player
+		player = switchTurn(player);
+	}
+
+	// end message
+	endMsg(winner);
+
+	system("pause"); // DELETE
+	// exit
 	return 0;
 }
