@@ -19,20 +19,11 @@ void printBoard(int board[3][3]) {
 	std::cout << std::endl;
 	for (int i = 0; i < SIZE; i++) {
 		for (int j = 0; j < SIZE; j++) {
-			/*
-			if (board[i][j] == 1) {
-				std::cout << "X";
+
+			// left edge spacing
+			if (j == 0) {
+				std::cout << " ";
 			}
-			else if (board[i][j] == 2) {
-				std::cout << "O";
-			}
-			else if(board[i][j] == 0){
-				std::cout << "+";
-			}
-			else {
-				cout << "Error" << endl;
-			}
-			*/
 
 			switch (board[i][j]) {
 				// 1 = X
@@ -45,17 +36,30 @@ void printBoard(int board[3][3]) {
 					break;
 				// 0 = blank
 				case 0:
-					std::cout << "+";
+					std::cout << " ";
 					break;
 				// This should never happen
 				default:
 					std::cout << "Error";
 			}
+
 			// spacer
-			std::cout << "  ";
+			// std::cout << "  ";
+
+			// grid lines
+			if (j < SIZE - 1) {
+				std::cout << " | ";
+			}
+
 		}
 		// spacer
 		std::cout << std::endl;
+
+		// grid lines
+		if(i < SIZE-1){
+			std::cout << "--- --- ---";
+		}
+
 		// new line
 		std::cout << std::endl;
 	}
