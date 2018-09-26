@@ -133,11 +133,25 @@ void updateBoard(int board[3][3], int player) {
 
 	// while unopen space
 	while (board[row][col] != 0) {
-		cout << "This spot has already been played. Pick another." << endl;
-		turnMsg(player);
 		printBoard(board);
-		int row = takeRow();
-		int col = takeCol();
+		cout << "This spot has already been played. Pick another." << endl;
+
+		// This changes the player's turn, which we don't want in this while loop
+		// turnMsg(player);
+		// keep same player through loop
+		if (player == 1) {
+			cout << "X's turn" << endl;
+		}
+		else if (player == 2) {
+			cout << "O's turn" << endl;
+		}
+		else {
+			cout << "Error" << endl;
+		}
+		printBoard(board);
+		
+		row = takeRow() - 1;
+		col = takeCol() - 1;
 	}
 	board[row][col] = player;
 }
