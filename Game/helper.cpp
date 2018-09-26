@@ -166,7 +166,7 @@ int testForWin(int board[3][3], int player) {
 
 	// if all moves have been taken
 	// tie
-	if (turnCount == 9) {
+	if (turnCount > 9) {
 		return 3;
 	}
 
